@@ -7,6 +7,7 @@ const cors = require("cors");
 
 
 
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -71,8 +72,8 @@ app.get("/periods", async (req, res) => {
 app.put("/periods/:period", async (req, res) => {
   const { period } = req.params;
   const updated = await Period.findOneAndUpdate({ period }, req.body, { new: true });
-  await schedulePeriods();
   res.json(updated);
+  await schedulePeriods();
 });
 
 // Initialize default 9 periods if empty
@@ -96,7 +97,10 @@ async function initPeriods() {
   await schedulePeriods();
 }
 
-app.listen(4000, () => {
-  console.log("🚀 Backend running on port 4000");
+
+const PORT = process.env.PORT || 6000;
+
+app.listen(process.env.PORT, () => {
+  console.log(`🚀 Backend running on port ${PORT}` );
   initPeriods();
 });
