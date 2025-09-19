@@ -29,10 +29,16 @@ const periodSchema = new mongoose.Schema({
 const Period = mongoose.model("Period", periodSchema);
 
 // MQTT connection
-const client = mqtt.connect("mqtts://e30027a29d034ae5beb2fecbe9c2caa6.s1.eu.hivemq.cloud:8883", {
-  username: "Adedeji",
-  password: "Adedeji123",
+
+const brokerUrl = process.env.REACT_APP_MQTT_BROKER;
+const username = process.env.REACT_APP_MQTT_USERNAME;
+const password = process.env.REACT_APP_MQTT_PASSWORD;
+
+const client = mqtt.connect(brokerUrl, {
+  username,
+  password,
 });
+
 
 client.on("connect", () => console.log("✅ Connected to HiveMQ Cloud"));
 
