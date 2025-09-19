@@ -37,8 +37,9 @@ const password = process.env.REACT_APP_MQTT_PASSWORD;
 const client = mqtt.connect(brokerUrl, {
   username,
   password,
+  protocol: 'wss',
+  port: 8884, // port for HiveMQ WebSockets
 });
-
 
 client.on("connect", () => console.log("✅ Connected to HiveMQ Cloud"));
 
