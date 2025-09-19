@@ -33,12 +33,13 @@ const Period = mongoose.model("Period", periodSchema);
 const brokerUrl = process.env.REACT_APP_MQTT_BROKER;
 const username = process.env.REACT_APP_MQTT_USERNAME;
 const password = process.env.REACT_APP_MQTT_PASSWORD;
+const port = parseInt(process.env.MQTT_PORT, 10) || 8884
 
 const client = mqtt.connect(brokerUrl, {
   username,
   password,
   protocol: 'wss',
-  port: 8884, // port for HiveMQ WebSockets
+  port: port, // port for HiveMQ WebSockets
 });
 
 client.on("connect", () => console.log("✅ Connected to HiveMQ Cloud"));
