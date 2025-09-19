@@ -41,7 +41,7 @@ const Period = mongoose.model("Period", periodSchema);
 
 // ✅ MQTT connection (HiveMQ Cloud)
 const client = mqtt.connect(process.env.MQTT_BROKER, {
-  port: Number(process.env.MQTT_PORT),
+  port: process.env.MQTT_PORT,
   protocol: 'mqtts',
   username: process.env.MQTT_USERNAME,
   password: process.env.MQTT_PASSWORD,
